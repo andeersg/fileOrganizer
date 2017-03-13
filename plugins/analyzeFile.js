@@ -22,11 +22,9 @@ module.exports = function(filename, path) {
   return new Promise(function(resolve, reject) {
     var stats = fs.lstatSync(path + '/' + filename);
     if (stats.isDirectory()) {
-      debug(filename + ' is a directory');
       // Look for a media file inside.
       var mediaFile = scanFolderForMedia(path + '/' + filename);
       if (mediaFile) {
-        // Add it and continue.
         fileObject.matchedName = mediaFile;
         fileObject.orignalPath = fileObject.orignalPath + '/' + filename;
         fileObject.cleanUp.push(fileObject.orignalPath);
@@ -43,7 +41,7 @@ module.exports = function(filename, path) {
       // Not a folder, and not a media file. Mark it for manual processing?
       fileObject.manual = true;
     }
-
+    debug('Analyzing: ' + fileObject.matchedName);
     resolve(fileObject);
   });
 }

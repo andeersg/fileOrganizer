@@ -2,6 +2,9 @@ const request = require('request');
 const pattern = /^([a-zA-Z0-9. ]+)S([0-9]+)E([0-9]+)(.+)\.([a-zA-Z0-9]+)$/;
 
 module.exports = function(file) {
+  if (!file) {
+    console.log('WHAT?');
+  }
   return new Promise(function(resolve, reject) {
     // Desired output should be an addition to the object.
     // file.outputName = 'Pretty name of show - S01E01.mkv';
