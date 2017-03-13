@@ -50,7 +50,7 @@ module.exports = function(filename, path) {
 var scanFolderForMedia = function(folder) {
   var files = fs.readdirSync(folder, 'utf8');
   var mediaFiles = files.filter(matchMedia);
-  debug('Mediafiles length for ' + file.matchedName + ' is: ' + mediaFiles.length);
+  debug('Mediafiles length for ' + folder + ' is: ' + mediaFiles.length);
   if (mediaFiles.length == 1) {
     return mediaFiles[0];
   }
