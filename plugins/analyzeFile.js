@@ -25,7 +25,8 @@ module.exports = function(filename, path) {
       // Look for a media file inside.
       var mediaFile = scanFolderForMedia(path + '/' + filename);
       if (mediaFile) {
-        fileObject.matchedName = mediaFile;
+        // @NOTE If folder matches, we should use it for renaming.
+        //fileObject.matchedName = mediaFile;
         fileObject.orignalPath = fileObject.orignalPath + '/' + filename;
         fileObject.cleanUp.push(fileObject.orignalPath);
       }
