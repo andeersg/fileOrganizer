@@ -41,7 +41,7 @@ module.exports = function(filename, path) {
       // Not a folder, and not a media file. Mark it for manual processing?
       fileObject.manual = true;
     }
-    debug(fileObject);
+    debug('Analyzing: ' + fileObject.matchedName);
     resolve(fileObject);
   });
 }
@@ -49,7 +49,7 @@ module.exports = function(filename, path) {
 var scanFolderForMedia = function(folder) {
   var files = fs.readdirSync(folder, 'utf8');
   var mediaFiles = files.filter(matchMedia);
-
+  debug('Mediafiles length for ' + file.matchedName + ' is: ' + mediaFiles.length);
   if (mediaFiles.length == 1) {
     return mediaFiles[0];
   }

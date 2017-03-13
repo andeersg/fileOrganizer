@@ -3,9 +3,6 @@ const debug = require('debug')('rename');
 const pattern = /^([a-zA-Z0-9. ]+)S([0-9]+)E([0-9]+)(.+)\.([a-zA-Z0-9]+)$/;
 
 module.exports = function(file) {
-  if (!file) {
-    console.log('WHAT?');
-  }
   return new Promise(function(resolve, reject) {
     // Desired output should be an addition to the object.
     // file.outputName = 'Pretty name of show - S01E01.mkv';
@@ -25,7 +22,7 @@ module.exports = function(file) {
         file.outputName = file.data.showName + ' - S' + file.data.season + 'E' + file.data.episode + '.' + file.data.extension;
         file.outputPath = file.data.showName + '/Season ' + file.data.season + '/' + file.outputName;
 
-        debug(file);
+        debug('Matched and all is good: ' + file.matchedName);
         resolve(file);
       });
 
@@ -35,7 +32,7 @@ module.exports = function(file) {
     else {
       // Manual mode?
       file.manual = true;
-      debug(file);
+      debug('Manual mode for ' + file.matchedName);
       resolve(file);
     }
   });
@@ -60,16 +57,19 @@ var lookupAPI = function(file) {
       var data = JSON.parse(body);
       if (!data.length) {
         // Return false.
+        debug('No API results for: ' + file.matchedName);
         file.manual = true;
         resolve(file);
       }
       else if (data.length == 1) {
         // Awesome, this has to be it.
+        debug('API found it: ' + file.matchedName);
         file.data.showName = data[0].show.name;
         resolve(file);
       }
       else {
         // Just take the first one.
+        debug('More than one: ' + file.matchedName);
         file.data.showName = data[0].show.name;
         resolve(file);
       }
