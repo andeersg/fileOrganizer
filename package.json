@@ -8,7 +8,8 @@
     "mv": "^2.1.1",
     "request": "^2.75.0",
     "rimraf": "^2.6.1",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "mocha": "^3.2.0"

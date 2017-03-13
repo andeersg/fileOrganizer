@@ -10,10 +10,7 @@ app.use(express.static('public'));
 // Plugins
 const tvShowRenameMover = require('./plugins/tvShowRenameMover');
 
-const config = {
-  source: '/Users/anders.grendstadbakk/Projects/node/seriesRenamer/samples',
-  destination: '/Users/anders.grendstadbakk/Projects/node/seriesRenamer/sample_destination',
-};
+const config = require('./config.json');
 
 // Display web interface to manually do stuff.
 app.get('/', function (req, res) {
@@ -27,7 +24,8 @@ http.listen(3000, function () {
   var checkInterval = 1000 * 60 * 1;
 
   // @TODO Could extend it to a loading system where each plugin specifies their interval.
+  // @NOTE On top level we could send in the IO object, and let the modules them selves do emitting and such.
   setInterval(function() {
-    tvShowRenameMover(config);
+    tvShowRenameMover(config.tvSeries);
   }, checkInterval);
 });

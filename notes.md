@@ -37,3 +37,10 @@ A script that is triggered N times a day. That scans folder and moves stuff.
 4. This is repeated for each file.
 5. We either send in the IO object, or we use EventEmitter to emit stuff.
 6. If clients are connected we emit to them, else we just log.
+
+## Tables
+
+We want a config table (key-value).
+
+* Last-check?
+* Settings like interval between checks.
