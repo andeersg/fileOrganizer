@@ -31,7 +31,7 @@ module.exports = function(settings, cb) {
   });
 
   Promise.all(fileProcesses).then(function(results) {
-    console.log(JSON.stringify(results));
+    //console.log(JSON.stringify(results));
     console.log('All good for now.');
     cb(null);
   })

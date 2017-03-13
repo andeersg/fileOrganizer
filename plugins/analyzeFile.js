@@ -41,14 +41,13 @@ module.exports = function(filename, path) {
       // Not a folder, and not a media file. Mark it for manual processing?
       fileObject.manual = true;
     }
-    debug('Analyzing: ' + fileObject.matchedName);
+    debug(fileObject);
     resolve(fileObject);
   });
 }
 
 var scanFolderForMedia = function(folder) {
   var files = fs.readdirSync(folder, 'utf8');
-  debug(files);
   var mediaFiles = files.filter(matchMedia);
 
   if (mediaFiles.length == 1) {

@@ -1,4 +1,5 @@
 const request = require('request');
+const debug = require('debug')('rename');
 const pattern = /^([a-zA-Z0-9. ]+)S([0-9]+)E([0-9]+)(.+)\.([a-zA-Z0-9]+)$/;
 
 module.exports = function(file) {
@@ -24,6 +25,7 @@ module.exports = function(file) {
         file.outputName = file.data.showName + ' - S' + file.data.season + 'E' + file.data.episode + '.' + file.data.extension;
         file.outputPath = file.data.showName + '/Season ' + file.data.season + '/' + file.outputName;
 
+        debug(file);
         resolve(file);
       });
 
@@ -33,6 +35,7 @@ module.exports = function(file) {
     else {
       // Manual mode?
       file.manual = true;
+      debug(file);
       resolve(file);
     }
   });
