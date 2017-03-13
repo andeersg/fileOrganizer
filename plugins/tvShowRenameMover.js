@@ -4,7 +4,7 @@ const analyzeFile = require('./analyzeFile');
 const renameFile = require('./renameFile');
 const moveFile = require('./moveFile');
 
-module.exports = function(settings) {
+module.exports = function(settings, cb) {
   var files = fs.readdirSync(settings.source, 'utf8');
 
   files = files.filter((filename) => filename.substr(0, 1) == '.' ? false : true);
@@ -31,10 +31,12 @@ module.exports = function(settings) {
   });
 
   Promise.all(fileProcesses).then(function(results) {
-    //console.log(JSON.stringify(results));
+    console.log(JSON.stringify(results));
     console.log('All good for now.');
+    cb(null);
   })
   .catch(function(error) {
     console.log(error);
+    cb(error);
   });
 }

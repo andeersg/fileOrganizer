@@ -25,7 +25,13 @@ http.listen(3000, function () {
 
   // @TODO Could extend it to a loading system where each plugin specifies their interval.
   // @NOTE On top level we could send in the IO object, and let the modules them selves do emitting and such.
+  var tvRenamerInProgress = false;
   setInterval(function() {
-    tvShowRenameMover(config.tvSeries);
+    if (tvShowRenameMover) {
+      tvShowRenameMover = true;
+      tvShowRenameMover(config.tvSeries, function(error) {
+        tvShowRenameMover = false;
+      });
+    }
   }, checkInterval);
 });
