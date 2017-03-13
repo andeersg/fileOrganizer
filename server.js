@@ -27,10 +27,10 @@ http.listen(3000, function () {
   // @NOTE On top level we could send in the IO object, and let the modules them selves do emitting and such.
   var tvRenamerInProgress = false;
   setInterval(function() {
-    if (tvShowRenameMover) {
-      tvShowRenameMover = true;
+    if (tvRenamerInProgress) {
+      tvRenamerInProgress = true;
       tvShowRenameMover(config.tvSeries, function(error) {
-        tvShowRenameMover = false;
+        tvRenamerInProgress = false;
       });
     }
   }, checkInterval);
