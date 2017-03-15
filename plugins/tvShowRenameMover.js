@@ -10,6 +10,8 @@ module.exports = function(settings, cb) {
   files = files.filter((filename) => filename.substr(0, 1) == '.' ? false : true);
   files = files.filter(matchFilename.match);
 
+  // @NOTE Should limit to only 10 per run. (Or some other number)
+
   // All files should be ok now.
   let fileProcesses = [];
 
