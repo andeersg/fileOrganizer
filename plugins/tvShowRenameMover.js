@@ -20,6 +20,7 @@ module.exports = function(settings, cb) {
     .then(function(file) {
       if (file.manual) {
         // Return what ever we need to do.
+	return file;
       }
       else {
         return moveFile(file, settings);
@@ -31,7 +32,7 @@ module.exports = function(settings, cb) {
   });
 
   Promise.all(fileProcesses).then(function(results) {
-    //console.log(JSON.stringify(results));
+    console.log(JSON.stringify(results));
     console.log('All good for now.');
     cb(null);
   })

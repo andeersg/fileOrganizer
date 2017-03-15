@@ -21,19 +21,20 @@ http.listen(3000, function () {
 
   // @TODO This should be configurable from interface.
   // Maybe use a sqlite database.
-  var checkInterval = 1000 * 60 * 1;
+  var checkInterval = 1000 * 60 * 60;
 
   // @TODO Could extend it to a loading system where each plugin specifies their interval.
   // @NOTE On top level we could send in the IO object, and let the modules them selves do emitting and such.
-  // var tvRenamerInProgress = false;
-  // setInterval(function() {
-  //   if (tvRenamerInProgress) {
-  //     tvRenamerInProgress = true;
-  //     tvShowRenameMover(config.tvSeries, function(error) {
-  //       tvRenamerInProgress = false;
-  //     });
-  //   }
-  // }, checkInterval);
+  var tvRenamerInProgress = false;
+  setInterval(function() {
+    if (tvRenamerInProgress) {
+      tvRenamerInProgress = true;
+      tvShowRenameMover(config.tvSeries, function(error) {
+        tvRenamerInProgress = false;
+      });
+    }
+  }, checkInterval);
+  
   tvShowRenameMover(config.tvSeries, function(error) {
     tvRenamerInProgress = false;
   });
