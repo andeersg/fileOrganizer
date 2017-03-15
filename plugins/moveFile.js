@@ -4,12 +4,13 @@ const rimraf = require('rimraf');
 
 module.exports = function(file, settings) {
   return new Promise(function(resolve, reject) {
-    const from = file.orignalPath + '/' + file.matchedName;
+    const from = file.orignalPath + '/' + file.fileName;
     const to = settings.destination  + '/' + file.outputPath;
 
     mv(from, to, {mkdirp: true}, function(err) {
       if (err) {
         file.moved = false;
+	debug('Error: ' + err);
         resolve(file);
       }
       else {
