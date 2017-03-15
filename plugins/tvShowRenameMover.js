@@ -20,7 +20,7 @@ module.exports = function(settings, cb) {
     .then(function(file) {
       if (file.manual) {
         // Return what ever we need to do.
-	return file;
+	      return file;
       }
       else {
         return moveFile(file, settings);
