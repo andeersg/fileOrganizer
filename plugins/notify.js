@@ -1,4 +1,4 @@
-const config = require('./config.json');
+const config = require('../config.json');
 
 const Slack = require('node-slack');
 const slack = new Slack(config.notify.slack);

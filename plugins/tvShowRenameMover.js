@@ -4,7 +4,7 @@ const matchFilename = require('./matchFilename');
 const analyzeFile = require('./analyzeFile');
 const renameFile = require('./renameFile');
 const moveFile = require('./moveFile');
-const nedb = require('nedb');
+const Datastore = require('nedb');
 
 var db = new Datastore({
   filename: path.resolve(__dirname, './data/tvshow.db'), // Provide a path to the database file.
