@@ -10,7 +10,7 @@ module.exports = function(file, settings) {
     mv(from, to, {mkdirp: true}, function(err) {
       if (err) {
         file.moved = false;
-	debug('Error: ' + err);
+	      debug('Error: ' + err);
         resolve(file);
       }
       else {
