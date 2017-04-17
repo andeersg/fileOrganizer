@@ -4,6 +4,7 @@ const matchFilename = require('./matchFilename');
 const analyzeFile = require('./analyzeFile');
 const renameFile = require('./renameFile');
 const moveFile = require('./moveFile');
+const notify = require('./plugins/notify.js');
 const Datastore = require('nedb');
 
 var db = new Datastore({
@@ -28,7 +29,6 @@ module.exports = function(settings, cb) {
     db.findOne({matchedName: filename}, function(err, file) {
       if (file) {
         // Already been here, skip it.
-        console.log('Skipping ', filename, ', processed already.');
       }
       else {
         var fileProcess = analyzeFile(filename, settings.source)
@@ -41,9 +41,13 @@ module.exports = function(settings, cb) {
             });
           }
           else {
+            notify.sendMessage('Moving ' + filename, '#debug');
             return moveFile(file, settings);
             // Do we need a then to do something special if moved = false.
           }
+        })
+        .then(function(file) {
+          notify.sendMessage('Moved ' + filename, '#debug');
         });
         fileProcesses.push(fileProcess);
       }
@@ -51,7 +55,6 @@ module.exports = function(settings, cb) {
   });
 
   Promise.all(fileProcesses).then(function(results) {
-    console.log(JSON.stringify(results));
     console.log('All good for now.');
     cb(null);
   })
