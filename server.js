@@ -5,6 +5,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const debug = require('debug')('app');
 
+const notify = require('./plugins/notify.js');
+
 app.use(express.static('public'));
 
 // Plugins
@@ -18,6 +20,7 @@ app.get('/', function (req, res) {
 })
 http.listen(3000, function () {
   debug('Starting app');
+  notify.sendMessage(':rocket: Starting seriesRenamer', '#debug');
 
   // @TODO This should be configurable from interface.
   // Maybe use a sqlite database.
@@ -28,15 +31,14 @@ http.listen(3000, function () {
   var tvRenamerInProgress = false;
   setInterval(function() {
     if (tvRenamerInProgress) {
-     // tvRenamerInProgress = true;
-     // tvShowRenameMover(config.tvSeries, function(error) {
-     //   tvRenamerInProgress = false;
-     // });
+      tvRenamerInProgress = true;
+      tvShowRenameMover(config.tvSeries, function(error) {
+        tvRenamerInProgress = false;
+      });
     }
   }, checkInterval);
   
   tvRenamerInProgress = true;
-  console.log('Run tvShowRenameMover function');
   tvShowRenameMover(config.tvSeries, function(error) {
     tvRenamerInProgress = false;
   });
