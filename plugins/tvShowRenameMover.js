@@ -10,6 +10,8 @@ module.exports = function(settings, cb) {
   files = files.filter((filename) => filename.substr(0, 1) == '.' ? false : true);
   files = files.filter(matchFilename.match);
 
+  // files = files.slice(0, 10);
+
   // All files should be ok now.
   let fileProcesses = [];
 

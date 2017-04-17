@@ -28,13 +28,15 @@ http.listen(3000, function () {
   var tvRenamerInProgress = false;
   setInterval(function() {
     if (tvRenamerInProgress) {
-      tvRenamerInProgress = true;
-      tvShowRenameMover(config.tvSeries, function(error) {
-        tvRenamerInProgress = false;
-      });
+     // tvRenamerInProgress = true;
+     // tvShowRenameMover(config.tvSeries, function(error) {
+     //   tvRenamerInProgress = false;
+     // });
     }
   }, checkInterval);
   
+  tvRenamerInProgress = true;
+  console.log('Run tvShowRenameMover function');
   tvShowRenameMover(config.tvSeries, function(error) {
     tvRenamerInProgress = false;
   });
